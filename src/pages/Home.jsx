@@ -8,7 +8,7 @@ import logo from '../assets/images/logo.png';
 
 // Import videos (adjust paths as needed)
 // Video paths from public folder
-const floodVideo = "/videos/flood_features.mp4";
+const floodVideo = "/videos/flood.mp4";
 const forestFireVideo = "/videos/forestfire_features2.mp4";
 const earthquakeVideo = "/videos/earthquake_features2.mp4";
 const cycloneVideo = "/videos/cyclone_features.mp4";
