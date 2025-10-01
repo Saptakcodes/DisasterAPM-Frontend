@@ -71,13 +71,7 @@ venv/
 # ---------------------
 # Video, Audio, Media Files (Large)
 # ---------------------
-*.avi
-*.mov
-*.mkv
-*.mp3
-*.wav
-*.flac
-*.mp4
+
 !public/videos/*.mp4   # ✅ Allow videos in public/videos
 
 # ---------------------
