@@ -1,4 +1,6 @@
+# ---------------------
 # Logs
+# ---------------------
 logs
 *.log
 npm-debug.log*
@@ -7,15 +9,21 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-node_modules
-dist
-dist-ssr
+# ---------------------
+# Node Modules and Build Outputs
+# ---------------------
+node_modules/
+dist/
+dist-ssr/
+build/
 *.local
 
-# Editor directories and files
+# ---------------------
+# Editor Directories and Files
+# ---------------------
 .vscode/*
 !.vscode/extensions.json
-.idea
+.idea/
 .DS_Store
 *.suo
 *.ntvs*
@@ -23,8 +31,9 @@ dist-ssr
 *.sln
 *.sw?
 
-
-# Ignore raw video assets (to prevent large file push issues)
+# ---------------------
+# Ignore raw video assets in src and dist (local development files)
+# ---------------------
 frontend/src/assets/videos/
 dist/assets/videos/
 
@@ -62,13 +71,14 @@ venv/
 # ---------------------
 # Video, Audio, Media Files (Large)
 # ---------------------
-*.mp4
 *.avi
 *.mov
 *.mkv
 *.mp3
 *.wav
 *.flac
+*.mp4
+!public/videos/*.mp4   # ✅ Allow videos in public/videos
 
 # ---------------------
 # DLLs and Native Bindings (Large)
@@ -96,7 +106,7 @@ desktop.ini
 *.swo
 
 # ---------------------
-# Node/Frontend (if used)
+# Node/Frontend
 # ---------------------
 node_modules/
 dist/
@@ -108,7 +118,7 @@ build/
 .ipynb_checkpoints/
 
 # ---------------------
-# Git Ignore Rule for Everything Inside a Folder (Prevent Partial Commits)
+# Git Ignore Rule for Everything Inside Specific Folders
 # ---------------------
 static/assets/videos/
 ml/models/
