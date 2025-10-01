@@ -78,7 +78,7 @@ venv/
 *.wav
 *.flac
 *.mp4
-!public/videos/*.mp4   # ✅ Allow videos in public/videos
+
 
 # ---------------------
 # DLLs and Native Bindings (Large)
