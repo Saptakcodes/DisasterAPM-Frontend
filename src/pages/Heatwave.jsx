@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Chart, registerables } from 'chart.js';
-import heatwavebg from '../assets/videos/heatwave.mp4'
+const heatwavebg = '/videos/heatwave.mp4'
 
 // Register Chart.js components
 Chart.register(...registerables);

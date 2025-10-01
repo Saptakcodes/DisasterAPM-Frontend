@@ -7,14 +7,18 @@ import logo from '../assets/images/logo.png';
 
 
 // Import videos (adjust paths as needed)
-import floodVideo from '../assets/videos/flood_features.mp4';
-import forestFireVideo from '../assets/videos/forestfire_features2.mp4';
-import earthquakeVideo from '../assets/videos/earthquake_features2.mp4';
-import cycloneVideo from '../assets/videos/cyclone_features.mp4';
-import thunderstormVideo from '../assets/videos/thunderstorm_features2.mp4';
-import heatwaveVideo from '../assets/videos/heatwave.mp4';
-import homepgbackgroundvideo from '../assets/videos/disaster_video3.mp4'
-import heroimg from '../assets/images/first-img1.webp'
+// Video paths from public folder
+const floodVideo = "/videos/flood_features.mp4";
+const forestFireVideo = "/videos/forestfire_features2.mp4";
+const earthquakeVideo = "/videos/earthquake_features2.mp4";
+const cycloneVideo = "/videos/cyclone_features.mp4";
+const thunderstormVideo = "/videos/thunderstorm_features2.mp4";
+const heatwaveVideo = "/videos/heatwave.mp4";
+const homepgbackgroundvideo = "/videos/disaster_video3.mp4";
+
+// Keep image imports as usual
+import heroimg from "../assets/images/first-img1.webp";
+
 
 
 

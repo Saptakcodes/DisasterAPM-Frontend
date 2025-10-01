@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import disasterVideo from '../assets/videos/disaster_video1.mp4';
+const disasterVideo = "/videos/disaster_video1.mp4";
 
 const Login = () => {
   const [formData, setFormData] = useState({

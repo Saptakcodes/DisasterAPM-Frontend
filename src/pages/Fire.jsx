@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Chart, registerables } from 'chart.js';
-import firebg from '../assets/videos/forestfire_features2.mp4'
-
+const firebg = '/videos/forestfire_features2.mp4';
 // Register Chart.js components
 Chart.register(...registerables);
 

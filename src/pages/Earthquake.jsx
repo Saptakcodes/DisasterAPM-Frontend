@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Chart, registerables } from 'chart.js';
-import earthquakebg from '../assets/videos/earthquake_features2.mp4'
+const earthquakebg = '/videos/earthquake_features2.mp4';
 
 // Register Chart.js components
 Chart.register(...registerables);

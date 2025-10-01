@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Chart, registerables } from 'chart.js';
-import thunderstormbg from '../assets/videos/thunderstorm_features2.mp4'
+const thunderstormbg = '/videos/thunderstorm_features2.mp4'
 
 // Register Chart.js components
 Chart.register(...registerables);
