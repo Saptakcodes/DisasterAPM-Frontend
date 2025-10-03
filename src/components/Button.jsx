@@ -1,5 +1,6 @@
 // src/components/Button.jsx
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 
 const Button = ({ 
   children, 
@@ -9,6 +10,8 @@ const Button = ({
   className = '', 
   disabled = false,
   icon = null,
+  as, // New prop to support Link
+  to, // New prop for navigation path
   ...props 
 }) => {
   const baseClasses = 'px-6 py-3 rounded-lg font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2';
@@ -29,8 +32,29 @@ const Button = ({
     ${disabled ? disabledClasses : enabledClasses} 
     ${className}
     inline-flex items-center justify-center
-  `;
+  `.trim().replace(/\s+/g, ' ');
 
+  // If as prop is Link and to is provided, render as Link
+  if (as === Link && to) {
+    return (
+      <motion.div
+        whileHover={disabled ? {} : { scale: 1.03 }}
+        whileTap={disabled ? {} : { scale: 0.98 }}
+        className="inline-block"
+      >
+        <Link
+          to={to}
+          className={classes}
+          {...props}
+        >
+          {icon && <i className={`${icon} ${children ? 'mr-2' : ''}`}></i>}
+          {children}
+        </Link>
+      </motion.div>
+    );
+  }
+
+  // Default button behavior
   return (
     <motion.button
       whileHover={disabled ? {} : { scale: 1.03, boxShadow: "0 4px 8px rgba(0,0,0,0.1)" }}
@@ -38,7 +62,7 @@ const Button = ({
       type={type}
       onClick={disabled ? undefined : onClick}
       disabled={disabled}
-      className={classes.trim().replace(/\s+/g, ' ')}
+      className={classes}
       {...props}
     >
       {icon && <i className={`${icon} ${children ? 'mr-2' : ''}`}></i>}

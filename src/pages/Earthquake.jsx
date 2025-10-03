@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Chart, registerables } from 'chart.js';
-const earthquakebg = '/videos/earthquake_features2.mp4';
+import earthquakeImage from "../assets/images/earthquake-img.webp";
 
 // Register Chart.js components
 Chart.register(...registerables);
@@ -324,27 +324,22 @@ const Earthquake = () => {
       {/* Hero Section with Video Background */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
          {/* Video Background */}
-          <div className="absolute inset-0 z-0">
-            <video
-              autoPlay
-              loop
-              muted
-              playsInline
-              className="w-full h-full object-cover"
-              style={{ filter: 'brightness(1.2) contrast(1.1)' }}
-            >
-              <source src={earthquakebg} type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
-            
-            {/* Gradient overlay for better text visibility */}
-            <div 
-              className="absolute inset-0"
-              style={{
-                background: `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7))`
-              }}
-            />
-          </div>
+        <div className="absolute inset-0 z-0">
+          <img
+            src={earthquakeImage}
+            alt="Flood background"
+            className="w-full h-full object-cover"
+            style={{ filter: 'brightness(1.2) contrast(1.1)' }}
+          />
+          
+          {/* Gradient overlay */}
+          <div 
+            className="absolute inset-0"
+            style={{
+              background: `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6))`
+            }}
+          />
+        </div>
         
 
         {/* Hero Content */}

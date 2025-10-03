@@ -5,22 +5,17 @@ import { motion, useInView, useScroll, useTransform, AnimatePresence } from 'fra
 import Button from '../components/Button';
 import logo from '../assets/images/logo.png';
 
-
-// Import videos (adjust paths as needed)
-// Video paths from public folder
-import floodVideo from "/videos/flood.mp4";
-const forestFireVideo = "/videos/forestfire_features2.mp4";
-const earthquakeVideo = "/videos/earthquake_features2.mp4";
-const cycloneVideo = "/videos/cyclone_features.mp4";
-const thunderstormVideo = "/videos/thunderstorm_features2.mp4";
-const heatwaveVideo = "/videos/heatwave.mp4";
-const homepgbackgroundvideo = "/vite.svg";
+// Import images (adjust paths as needed)
+import floodImage from "../assets/images/flood-img1.jpg";
+import forestFireImage from "../assets/images/forestfire-img.jpeg";
+import earthquakeImage from "../assets/images/earthquake-img.webp";
+import cycloneImage from "../assets/images/cyclone-img.jpg";
+import thunderstormImage from "../assets/images/thunderstorm-img.jpg";
+import heatwaveImage from "../assets/images/heatwave-img.jpg";
+import homepgbackgroundimage from "../assets/images/first-img1.webp";
 
 // Keep image imports as usual
 import heroimg from "../assets/images/first-img1.webp";
-
-
-
 
 const Home = () => {
   const [email, setEmail] = useState('');
@@ -83,52 +78,52 @@ const Home = () => {
     }
   ];
 
-  const services = [
+ const services = [
     {
       title: 'Flood Prediction',
       description: 'Advanced flood risk assessment using rainfall patterns, river levels, and terrain analysis',
-      path: '/flood',
-      video: floodVideo,
+      path: '/flood', // ✅ Correct path
+      image: floodImage,
       bgColor: 'bg-blue-100 dark:bg-blue-900',
       icon: 'fas fa-water'
     },
     {
       title: 'Wildfire Detection',
       description: 'Early fire detection using thermal imaging, humidity sensors, and vegetation analysis',
-      path: '/fire',
-      video: forestFireVideo,
+      path: '/fire', // ✅ Correct path
+      image: forestFireImage,
       bgColor: 'bg-red-100 dark:bg-red-900',
       icon: 'fas fa-fire'
     },
     {
       title: 'Earthquake Early Warning',
       description: 'Seismic activity monitoring with advanced prediction algorithms',
-      path: '/earthquake',
-      video: earthquakeVideo,
+      path: '/earthquake', // ✅ Correct path
+      image: earthquakeImage,
       bgColor: 'bg-gray-200 dark:bg-gray-800',
       icon: 'fas fa-mountain'
     },
     {
       title: 'Cyclone Tracking',
       description: 'Real-time cyclone path prediction and intensity forecasting',
-      path: '/cyclone',
-      video: cycloneVideo,
+      path: '/cyclone', // ✅ Correct path
+      image: cycloneImage,
       bgColor: 'bg-blue-200 dark:bg-blue-800',
       icon: 'fas fa-wind'
     },
     {
       title: 'Thunderstorm Alert',
       description: 'Lightning prediction and storm severity assessment',
-      path: '/thunderstorm',
-      video: thunderstormVideo,
+      path: '/thunderstorm', // ✅ Correct path
+      image: thunderstormImage,
       bgColor: 'bg-purple-100 dark:bg-purple-900',
       icon: 'fas fa-bolt'
     },
     {
       title: 'Heatwave Monitoring',
       description: 'Extreme temperature forecasting and health risk assessment',
-      path: '/heatwave',
-      video: heatwaveVideo,
+      path: '/heatwave', // ✅ Correct path
+      image: heatwaveImage,
       bgColor: 'bg-red-100 dark:bg-red-800',
       icon: 'fas fa-temperature-high'
     }
@@ -245,124 +240,114 @@ const Home = () => {
         ))}
       </div>
 
-
-<section 
-  id="hero" 
-  ref={heroRef}
-  className="relative h-screen flex items-center justify-center text-white overflow-hidden"
->
-  {/* Video Background */}
-  <div className="absolute inset-0 z-0">
-    <video
-      autoPlay
-      loop
-      muted
-      playsInline
-      className="w-full h-full object-cover"
-      style={{ filter: 'brightness(1.2) contrast(1.1)' }}
-    >
-      <source src={homepgbackgroundvideo} type="video/mp4" />
-      Your browser does not support the video tag.
-    </video>
-    
-    {/* Gradient overlay for better text visibility */}
-    <div 
-      className="absolute inset-0"
-      style={{
-        background: `linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3))`
-      }}
-    />
-  </div>
-
-  <motion.div 
-    className="container mx-auto px-2 text-center relative z-10"
-    style={{ opacity, scale, y }}
-  >
-    <motion.div
-      initial={{ opacity: 0, y: 50 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 1, ease: "easeOut" }}
-      className="mb-8"
-    >
-<div className="w-20 h-20 mx-auto mb-6 bg-green-500 rounded-2xl flex items-center justify-center transform rotate-12">
-  <img
-    src={logo}
-    alt="Logo"
-    className="w-full h-full p-0.5 object-contain animate-pulse"
-  />
-</div>
-
-
-
-
-    </motion.div>
-
-    <motion.h1 
-      initial={{ opacity: 0, y: 30 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8, delay: 0.2 }}
-      className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-green-400 to-blue-400 bg-clip-text text-transparent"
-    >
-      DisasterAPM
-    </motion.h1>
-    
-    <motion.p 
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8, delay: 0.4 }}
-      className="text-xl md:text-3xl mb-8 font-light text-gray-200"
-    >
-      AI-Powered Early Warning System
-    </motion.p>
-    
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8, delay: 0.6 }}
-      className="flex flex-col sm:flex-row gap-4 justify-center items-center"
-    >
-      <Button 
-        as={Link} 
-        to="#features" 
-        className="px-8 py-4 text-lg bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700"
+      <section 
+        id="hero" 
+        ref={heroRef}
+        className="relative h-screen flex items-center justify-center text-white overflow-hidden"
       >
-        <i className="fas fa-rocket mr-2"></i>
-        Explore Services
-      </Button>
-<Link to="/alerts">
-  <Button 
-    variant="outline" 
-    className="px-8 py-4 text-lg border-white text-white hover:from-green-500 to-green-600 hover:text-black"
-  >
-    <i className="fas fa-bell mr-2"></i>
-    View Alerts
-  </Button>
-</Link>
-    </motion.div>
-  </motion.div>
+        {/* Image Background */}
+        <div className="absolute inset-0 z-0">
+          <img
+            src={homepgbackgroundimage}
+            alt="Disaster Monitoring Background"
+            className="w-full h-full object-cover"
+            style={{ filter: 'brightness(1.2) contrast(1.1)' }}
+          />
+          
+          {/* Gradient overlay for better text visibility */}
+          <div 
+            className="absolute inset-0"
+            style={{
+              background: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5))`
+            }}
+          />
+        </div>
 
-  {/* Animated scroll indicator */}
-  <motion.div 
-    className="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-10"
-    animate={{ y: [0, 15, 0] }}
-    transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
-  >
-    <div className="w-8 h-12 border-2 border-green-400 rounded-full flex justify-center">
-      <motion.div
-        animate={{ y: [0, 12, 0] }}
-        transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
-        className="w-1 h-3 bg-green-400 rounded-full mt-2"
-      />
-    </div>
-  </motion.div>
+        <motion.div 
+          className="container mx-auto px-2 text-center relative z-10"
+          style={{ opacity, scale, y }}
+        >
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, ease: "easeOut" }}
+            className="mb-8"
+          >
+            <div className="w-20 h-20 mx-auto mb-6 bg-green-500 rounded-2xl flex items-center justify-center transform rotate-12">
+              <img
+                src={logo}
+                alt="Logo"
+                className="w-full h-full p-0.5 object-contain animate-pulse"
+              />
+            </div>
+          </motion.div>
 
-  {/* Animated gradient overlay */}
-  <motion.div 
-    className="absolute inset-0 bg-gradient-to-b from-transparent via-green-500/10 to-green-700/20 z-0"
-    animate={{ opacity: [0.3, 0.5, 0.3] }}
-    transition={{ duration: 4, repeat: Infinity }}
-  />
-</section>
+          <motion.h1 
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-green-400 to-blue-400 bg-clip-text text-transparent"
+          >
+            DisasterAPM
+          </motion.h1>
+          
+          <motion.p 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="text-xl md:text-3xl mb-8 font-light text-gray-200"
+          >
+            AI-Powered Early Warning System
+          </motion.p>
+          
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+            className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+          >
+            <Button 
+              as={Link} 
+              to="#features" 
+              className="px-8 py-4 text-lg bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700"
+            >
+              <i className="fas fa-rocket mr-2"></i>
+              Explore Services
+            </Button>
+            <Link to="/alerts">
+              <Button 
+                variant="outline" 
+                className="px-8 py-4 text-lg border-white text-white hover:from-green-500 to-green-600 hover:text-black"
+              >
+                <i className="fas fa-bell mr-2"></i>
+                View Alerts
+              </Button>
+            </Link>
+          </motion.div>
+        </motion.div>
+
+        {/* Animated scroll indicator */}
+        <motion.div 
+          className="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-10"
+          animate={{ y: [0, 15, 0] }}
+          transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
+        >
+          <div className="w-8 h-12 border-2 border-green-400 rounded-full flex justify-center">
+            <motion.div
+              animate={{ y: [0, 12, 0] }}
+              transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
+              className="w-1 h-3 bg-green-400 rounded-full mt-2"
+            />
+          </div>
+        </motion.div>
+
+        {/* Animated gradient overlay */}
+        <motion.div 
+          className="absolute inset-0 bg-gradient-to-b from-transparent via-green-500/10 to-green-700/20 z-0"
+          animate={{ opacity: [0.3, 0.5, 0.3] }}
+          transition={{ duration: 4, repeat: Infinity }}
+        />
+      </section>
 
       {/* Stats Section */}
       <section className="py-12 bg-gradient-to-r from-green-50 to-blue-50 dark:from-gray-800 dark:to-gray-900">
@@ -524,15 +509,11 @@ const Home = () => {
               >
                 <div className="relative h-48 overflow-hidden">
                   <div className={`absolute inset-0 ${service.bgColor} flex items-center justify-center`}>
-                    <video 
-                      autoPlay 
-                      muted 
-                      loop 
-                      playsInline 
+                    <img 
+                      src={service.image}
+                      alt={service.title}
                       className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
-                    >
-                      <source src={service.video} type="video/mp4" />
-                    </video>
+                    />
                   </div>
                   <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-300"></div>
                   <div className="absolute top-4 left-4 w-12 h-12 bg-white/90 dark:bg-gray-800/90 rounded-xl flex items-center justify-center shadow-lg">
@@ -868,12 +849,10 @@ const Home = () => {
               <i className="fas fa-envelope absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
             </div>
             <Button variant="secondary" type="submit" className="px-8 py-4 text-lg">
-            <i className="fas fa-paper-plane mr-2"></i>
-            Subscribe Now
+              <i className="fas fa-paper-plane mr-2"></i>
+              Subscribe Now
             </Button>
-
           </motion.form>
-
         </div>
       </section>
     </div>
@@ -881,4 +860,3 @@ const Home = () => {
 };
 
 export default Home;
-          

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Chart, registerables } from 'chart.js';
-const heatwavebg = '/videos/heatwave.mp4'
+import heatwaveImage from "../assets/images/heatwave-img.jpg";
 
 // Register Chart.js components
 Chart.register(...registerables);
@@ -257,29 +257,23 @@ const Heatwave = () => {
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
       {/* Hero Section with Video Background */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
-        {/* Video Background */}
-                  <div className="absolute inset-0 z-0">
-                    <video
-                      autoPlay
-                      loop
-                      muted
-                      playsInline
-                      className="w-full h-full object-cover"
-                      style={{ filter: 'brightness(1.2) contrast(1.1)' }}
-                    >
-                      <source src={heatwavebg} type="video/mp4" />
-                      Your browser does not support the video tag.
-                    </video>
-                    
-                    {/* Gradient overlay for better text visibility */}
-                    <div 
-                      className="absolute inset-0"
-                      style={{
-                        background: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5))`
-                      }}
-                    />
-                  </div>
-                
+        {/* Image Background */}
+            <div className="absolute inset-0 z-0">
+            <img
+              src={heatwaveImage}
+              alt="Flood background"
+              className="w-full h-full object-cover"
+              style={{ filter: 'brightness(1.2) contrast(1.1)' }}
+            />
+            
+            {/* Gradient overlay */}
+            <div 
+              className="absolute inset-0"
+              style={{
+                background: `linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3))`
+              }}
+            />
+          </div>
 
         {/* Hero Content */}
         <div className="relative z-10 text-center px-4">

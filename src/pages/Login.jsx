@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-const disasterVideo = "/videos/disaster_video1.mp4";
+import disasterImage from "../assets/images/disaster-img1.jpg";
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -9,14 +9,12 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [shake, setShake] = useState(false);
-  const videoRef = useRef(null);
+  const imageRef = useRef(null);
 
   useEffect(() => {
-    // Ensure video plays correctly on component mount
-    if (videoRef.current) {
-      videoRef.current.play().catch(error => {
-        console.log("Video autoplay prevented:", error);
-      });
+    // Image preloading or other effects can go here
+    if (imageRef.current) {
+      console.log("Image loaded successfully");
     }
   }, []);
 
@@ -54,19 +52,23 @@ const Login = () => {
 
   return (
     <div className="relative min-h-screen overflow-hidden font-sans">
-      {/* Background Video */}
-      <video 
-        ref={videoRef}
-        autoPlay 
-        muted 
-        loop 
-        playsInline 
-        className="absolute inset-0 w-full h-full object-cover z-0"
-      >
-        <source src={disasterVideo} type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
-
+      {/* Background Image */}
+      <div className="absolute inset-0 z-0">
+        <img 
+          ref={imageRef}
+          src={disasterImage}
+          alt="Disaster background"
+          className="w-full h-full object-cover"
+          style={{ filter: 'brightness(0.7) contrast(1.1)' }}
+        />
+        {/* Gradient overlay for better text readability */}
+        <div 
+          className="absolute inset-0"
+          style={{
+            background: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4))`
+          }}
+        />
+      </div>
 
       {/* Login Card */}
       <div className="relative z-20 flex items-center justify-center min-h-screen px-4">
