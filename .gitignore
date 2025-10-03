@@ -27,7 +27,7 @@ dist-ssr
 # Ignore raw video assets (to prevent large file push issues)
 frontend/src/assets/videos/
 dist/assets/videos/
-
+frontend/public/videos/
 # ---------------------
 # Python: Virtual Environments
 # ---------------------

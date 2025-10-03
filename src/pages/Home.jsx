@@ -8,13 +8,13 @@ import logo from '../assets/images/logo.png';
 
 // Import videos (adjust paths as needed)
 // Video paths from public folder
-const floodVideo = "/videos/flood.mp4";
+import floodVideo from "/videos/flood.mp4";
 const forestFireVideo = "/videos/forestfire_features2.mp4";
 const earthquakeVideo = "/videos/earthquake_features2.mp4";
 const cycloneVideo = "/videos/cyclone_features.mp4";
 const thunderstormVideo = "/videos/thunderstorm_features2.mp4";
 const heatwaveVideo = "/videos/heatwave.mp4";
-const homepgbackgroundvideo = "/videos/disaster_video3.mp4";
+const homepgbackgroundvideo = "/vite.svg";
 
 // Keep image imports as usual
 import heroimg from "../assets/images/first-img1.webp";
