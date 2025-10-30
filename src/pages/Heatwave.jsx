@@ -30,6 +30,7 @@ const Heatwave = () => {
   const [accuracy, setAccuracy] = useState(null);
   const [darkMode, setDarkMode] = useState(false);
   const [currentTip, setCurrentTip] = useState(0);
+  const [satelliteImage, setSatelliteImage] = useState(null);
 
   // Weather API states
   const [weatherData, setWeatherData] = useState(null);
@@ -80,14 +81,14 @@ const Heatwave = () => {
       ]
     },
     {
-      title: "Wildfire Preparedness",
+      title: "Community Preparedness",
       icon: "fas fa-fire",
-      tips: [
-        "Create defensible space around your property",
-        "Have an evacuation plan and emergency kit ready",
-        "Stay informed about fire weather warnings",
-        "Know multiple evacuation routes from your area"
-      ]
+    tips: [
+      "Establish neighborhood check-in systems for vulnerable residents",
+      "Know locations of public cooling centers and pools",
+      "Share information about heat warnings with community members",
+      "Volunteer to help those without adequate cooling at home"
+    ]
     }
   ];
 
@@ -410,6 +411,18 @@ const Heatwave = () => {
     }));
   };
 
+  // Handle image upload
+  const handleImageUpload = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        setSatelliteImage(e.target.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   // FIXED: Updated handleSubmit function with better error handling
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -673,22 +686,22 @@ const Heatwave = () => {
       {/* Hero Section with Video Background */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
         {/* Image Background */}
-            <div className="absolute inset-0 z-0">
-            <img
-              src={heatwaveImage}
-              alt="Flood background"
-              className="w-full h-full object-cover"
-              style={{ filter: 'brightness(1.2) contrast(1.1)' }}
-            />
-            
-            {/* Gradient overlay */}
-            <div 
-              className="absolute inset-0"
-              style={{
-                background: `linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3))`
-              }}
-            />
-          </div>
+        <div className="absolute inset-0 z-0">
+          <img
+            src={heatwaveImage}
+            alt="Flood background"
+            className="w-full h-full object-cover"
+            style={{ filter: 'brightness(1.2) contrast(1.1)' }}
+          />
+          
+          {/* Gradient overlay */}
+          <div 
+            className="absolute inset-0"
+            style={{
+              background: `linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3))`
+            }}
+          />
+        </div>
 
         {/* Hero Content */}
         <div className="relative z-10 text-center px-4">
@@ -894,6 +907,35 @@ const Heatwave = () => {
                       )}
                     </div>
                   ))}
+                  
+                  {/* Satellite Image Upload */}
+                  <div className="md:col-span-2">
+                    <label htmlFor="satelliteImage" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                      Satellite Image (Optional)
+                    </label>
+                    <input 
+                      type="file" 
+                      id="satelliteImage" 
+                      name="satelliteImage" 
+                      accept="image/*" 
+                      onChange={handleImageUpload}
+                      className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200 transition-all duration-300 hover:shadow-md"
+                    />
+                    <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">
+                      Upload recent satellite image for enhanced heat mapping
+                    </p>
+                    
+                    {satelliteImage && (
+                      <div className="mt-4">
+                        <h4 className="text-sm font-medium mb-2">Uploaded Image Preview</h4>
+                        <img 
+                          src={satelliteImage} 
+                          alt="Uploaded satellite" 
+                          className="w-full h-48 object-contain rounded-lg border border-gray-300 dark:border-gray-600"
+                        />
+                      </div>
+                    )}
+                  </div>
                 </div>
 
                 <div className="mt-10">
@@ -917,91 +959,126 @@ const Heatwave = () => {
               </form>
 
               {/* Prediction Result */}
-              
-            {predictionResult && (
-              <div className="mt-8 p-6 bg-red-50 dark:bg-red-900/30 text-red-800 dark:text-red-200 rounded-lg shadow-md transition-all duration-500 animate-fade-in">
-                <h3 className="font-bold text-xl mb-3 flex items-center">
-                  <i className="fas fa-info-circle mr-2"></i> Prediction Result
-                </h3>
-                <p className="text-lg mb-4">{predictionResult}</p>
-                
-                {/* Model Accuracy Display */}
-                {accuracy && (
-                  <div className="bg-green-100 dark:bg-green-900/30 p-4 rounded-lg text-center">
-                    <div className="text-sm text-green-700 dark:text-green-300">Model Accuracy</div>
-                    <div className="text-2xl font-bold text-green-800 dark:text-green-200">{accuracy}%</div>
-                    <div className="text-xs text-green-600 dark:text-green-400 mt-1">Training Performance</div>
-                  </div>
-                )}
-                
-                {/* Additional Prediction Details */}
-                {predictionResult && predictionResult.details && (
-                  <div className="mt-4 p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
-                    <h4 className="font-semibold text-blue-800 dark:text-blue-300 mb-2 flex items-center">
-                      <i className="fas fa-chart-bar mr-2"></i> Prediction Details
-                    </h4>
-                    <div className="grid grid-cols-2 gap-2 text-sm">
-                      <div className="text-blue-700 dark:text-blue-300">
-                        <span className="font-medium">Risk Level:</span> {predictionResult.details.risk_level || 'High'}
-                      </div>
-                      <div className="text-blue-700 dark:text-blue-300">
-                        <span className="font-medium">Model Type:</span> {predictionResult.details.model_type || 'RandomForest'}
-                      </div>
-                      <div className="text-blue-700 dark:text-blue-300">
-                        <span className="font-medium">Features Used:</span> {predictionResult.details.features_used || 9}
-                      </div>
-                      <div className="text-blue-700 dark:text-blue-300">
-                        <span className="font-medium">Prediction Score:</span> {predictionResult.details.prediction_numeric || '0.85'}
+              {predictionResult && (
+                <div className="mt-8 p-6 bg-red-50 dark:bg-red-900/30 text-red-800 dark:text-red-200 rounded-lg shadow-md transition-all duration-500 animate-fade-in">
+                  <h3 className="font-bold text-xl mb-3 flex items-center">
+                    <i className="fas fa-info-circle mr-2"></i> Prediction Result
+                  </h3>
+                  <p className="text-lg mb-4">{predictionResult}</p>
+                  
+                  {/* Model Accuracy Display */}
+                  {accuracy && (
+                    <div className="bg-green-100 dark:bg-green-900/30 p-4 rounded-lg text-center">
+                      <div className="text-sm text-green-700 dark:text-green-300">Model Accuracy</div>
+                      <div className="text-2xl font-bold text-green-800 dark:text-green-200">{accuracy}%</div>
+                      <div className="text-xs text-green-600 dark:text-green-400 mt-1">Training Performance</div>
+                    </div>
+                  )}
+                  
+                  {/* Additional Prediction Details */}
+                  {predictionResult && predictionResult.details && (
+                    <div className="mt-4 p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
+                      <h4 className="font-semibold text-blue-800 dark:text-blue-300 mb-2 flex items-center">
+                        <i className="fas fa-chart-bar mr-2"></i> Prediction Details
+                      </h4>
+                      <div className="grid grid-cols-2 gap-2 text-sm">
+                        <div className="text-blue-700 dark:text-blue-300">
+                          <span className="font-medium">Risk Level:</span> {predictionResult.details.risk_level || 'High'}
+                        </div>
+                        <div className="text-blue-700 dark:text-blue-300">
+                          <span className="font-medium">Model Type:</span> {predictionResult.details.model_type || 'RandomForest'}
+                        </div>
+                        <div className="text-blue-700 dark:text-blue-300">
+                          <span className="font-medium">Features Used:</span> {predictionResult.details.features_used || 9}
+                        </div>
+                        <div className="text-blue-700 dark:text-blue-300">
+                          <span className="font-medium">Prediction Score:</span> {predictionResult.details.prediction_numeric || '0.85'}
+                        </div>
                       </div>
                     </div>
-                  </div>
-                )}
+                  )}
 
-                {/* Fallback for string-based prediction results */}
-                {predictionResult && typeof predictionResult === 'string' && (
-                  <div className="mt-4 p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
-                    <h4 className="font-semibold text-blue-800 dark:text-blue-300 mb-2 flex items-center">
-                      <i className="fas fa-chart-bar mr-2"></i> Prediction Details
-                    </h4>
-                    <div className="grid grid-cols-2 gap-2 text-sm">
-                      <div className="text-blue-700 dark:text-blue-300">
-                        <span className="font-medium">Risk Level:</span> {predictionResult.includes('High') ? 'High' : predictionResult.includes('Low') ? 'Low' : 'Moderate'}
-                      </div>
-                      <div className="text-blue-700 dark:text-blue-300">
-                        <span className="font-medium">Model Type:</span> RandomForest
-                      </div>
-                      <div className="text-blue-700 dark:text-blue-300">
-                        <span className="font-medium">Features Used:</span> 9
-                      </div>
-                      <div className="text-blue-700 dark:text-blue-300">
-                        <span className="font-medium">Model Accuracy:</span> 98.34%
+                  {/* Fallback for string-based prediction results */}
+                  {predictionResult && typeof predictionResult === 'string' && (
+                    <div className="mt-4 p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
+                      <h4 className="font-semibold text-blue-800 dark:text-blue-300 mb-2 flex items-center">
+                        <i className="fas fa-chart-bar mr-2"></i> Prediction Details
+                      </h4>
+                      <div className="grid grid-cols-2 gap-2 text-sm">
+                        <div className="text-blue-700 dark:text-blue-300">
+                          <span className="font-medium">Risk Level:</span> {predictionResult.includes('High') ? 'High' : predictionResult.includes('Low') ? 'Low' : 'Moderate'}
+                        </div>
+                        <div className="text-blue-700 dark:text-blue-300">
+                          <span className="font-medium">Model Type:</span> RandomForest
+                        </div>
+                        <div className="text-blue-700 dark:text-blue-300">
+                          <span className="font-medium">Features Used:</span> 9
+                        </div>
+                        <div className="text-blue-700 dark:text-blue-300">
+                          <span className="font-medium">Model Accuracy:</span> 98.34%
+                        </div>
                       </div>
                     </div>
+                  )}
+                </div>
+              )}
+            </div>
+            
+            {/* Safety Information */}
+            <div className="bg-gradient-to-br from-red-50 to-orange-50 dark:from-gray-800 dark:to-gray-800 p-8 rounded-2xl shadow-xl transition-all duration-300 hover:shadow-2xl">
+              <h2 className="text-2xl font-bold mb-6 text-red-700 dark:text-red-400 flex items-center">
+                <i className="fas fa-life-ring mr-3"></i> Heatwave Safety Information
+              </h2>
+              
+              {/* Animated safety tips */}
+              <div className="mb-8 p-6 bg-white dark:bg-gray-700 rounded-xl shadow-md transition-all duration-500">
+                <div className="flex items-start mb-4">
+                  <div className="flex-shrink-0 bg-red-100 dark:bg-red-900 p-3 rounded-full mr-4">
+                    <i className={`${safetyTips[currentTip].icon} text-red-600 dark:text-red-300 text-lg`}></i>
                   </div>
-                )}
+                  <div>
+                    <h3 className="font-bold text-lg mb-2 text-gray-800 dark:text-white">
+                      {safetyTips[currentTip].title}
+                    </h3>
+                    <ul className="list-disc pl-5 text-gray-600 dark:text-gray-300 space-y-2">
+                      {safetyTips[currentTip].tips.map((tip, index) => (
+                        <li key={index}>{tip}</li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+                <div className="flex justify-center mt-4">
+                  {safetyTips.map((_, index) => (
+                    <button
+                      key={index}
+                      onClick={() => setCurrentTip(index)}
+                      className={`w-3 h-3 rounded-full mx-1 ${currentTip === index ? 'bg-red-600' : 'bg-gray-300 dark:bg-gray-600'}`}
+                    />
+                  ))}
+                </div>
               </div>
-            )}
+              
               {/* Emergency Contacts */}
-              <div className="bg-blue-50 dark:bg-blue-900/30 border-l-4 border-blue-500 dark:border-blue-400 p-5 rounded-lg">
-                <h3 className="font-bold text-blue-800 dark:text-blue-200 mb-3 text-lg flex items-center">
+              <div className="bg-red-50 dark:bg-red-900/30 border-l-4 border-red-500 dark:border-red-400 p-5 rounded-lg">
+                <h3 className="font-bold text-red-800 dark:text-red-200 mb-3 text-lg flex items-center">
                   <i className="fas fa-phone-alt mr-2"></i> Emergency Contacts
                 </h3>
                 <ul className="space-y-3">
-                  <li className="flex items-center text-blue-700 dark:text-blue-200">
-                    <i className="fas fa-phone text-blue-500 dark:text-blue-300 mr-3"></i>
+                  <li className="flex items-center text-red-700 dark:text-red-200">
+                    <i className="fas fa-phone text-red-500 dark:text-red-300 mr-3"></i>
                     <span>Local Emergency: 911</span>
                   </li>
-                  <li className="flex items-center text-blue-700 dark:text-blue-200">
-                    <i className="fas fa-phone text-blue-500 dark:text-blue-300 mr-3"></i>
+                  <li className="flex items-center text-red-700 dark:text-red-200">
+                    <i className="fas fa-phone text-red-500 dark:text-red-300 mr-3"></i>
                     <span>Heat Helpline: 1-800-HEAT-99</span>
                   </li>
                   <li className="flex items-center">
-                    <i className="fas fa-globe text-blue-500 dark:text-blue-300 mr-3"></i>
-                    <a href="#" className="text-blue-600 dark:text-blue-300 hover:underline">NOAA Heat Safety</a>
+                    <i className="fas fa-globe text-red-500 dark:text-red-300 mr-3"></i>
+                    <a href="#" className="text-red-600 dark:text-red-300 hover:underline">NOAA Heat Safety</a>
                   </li>
                   <li className="flex items-center">
-                    <i className="fas fa-map-marker-alt text-blue-500 dark:text-blue-300 mr-3"></i>
-                    <a href="#" className="text-blue-600 dark:text-blue-300 hover:underline">Cooling Centers Near You</a>
+                    <i className="fas fa-map-marker-alt text-red-500 dark:text-red-300 mr-3"></i>
+                    <a href="#" className="text-red-600 dark:text-red-300 hover:underline">Cooling Centers Near You</a>
                   </li>
                 </ul>
               </div>
@@ -1011,7 +1088,7 @@ const Heatwave = () => {
                 <h3 className="font-bold text-gray-800 dark:text-white mb-3 text-lg">Quick Actions</h3>
                 <div className="grid grid-cols-2 gap-3">
                   <button className="bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300 py-2 px-4 rounded-lg text-sm font-medium transition hover:bg-red-200 dark:hover:bg-red-800">
-                    <i className="fas fa-exclamation-triangle mr-1"></i> Report Fire
+                    <i className="fas fa-exclamation-triangle mr-1"></i> Report Emergency
                   </button>
                   <button className="bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 py-2 px-4 rounded-lg text-sm font-medium transition hover:bg-blue-200 dark:hover:bg-blue-800">
                     <i className="fas fa-download mr-1"></i> Safety Guide
