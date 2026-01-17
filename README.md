@@ -47,6 +47,10 @@ It aims to make disaster information *accessible, intuitive, and easy to interac
 
 Follow these steps to run the project locally.
 
+## Our Research Work
+
+👉 https://drive.google.com/file/d/1lyag6m9skkIwzL9ACeJ9s7xTeqFisx9m/view?usp=sharing
+
 ### 📥 Clone the repo
 
 ```bash
