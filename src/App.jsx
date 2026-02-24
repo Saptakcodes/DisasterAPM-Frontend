@@ -6,6 +6,7 @@ import Footer from './components/Footer';
 import Button from './components/Button';
 import Loader from './components/Loader';
 import Pagination from './components/Pagination';
+import InstallButton from './components/InstallButton'; // 👈 ADD THIS IMPORT
 import Home from './pages/Home';
 import Alerts from './pages/Alerts';
 import Analysis from './pages/Analysis';
@@ -128,6 +129,7 @@ function App() {
         {/* <Loader /> */}
         <Pagination />
         <Footer />
+        <InstallButton /> {/* 👈 ADD THIS LINE */}
       </div>
     </Router>
   );
