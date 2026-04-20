@@ -1,4 +1,4 @@
-# 🚨 DisasterAPM – AI-Powered Disaster Management & Prediction System
+# 🚨 DisasterAPM – AI-Powered Multi‑Disaster Prediction & Management Platform
 
 ### *(Real‑Time Early Warning System for Floods, Cyclones, Earthquakes, Forest Fires, Heatwaves & Thunderstorms)*
 
@@ -94,42 +94,28 @@ DisasterAPM fills the gap by providing a **single, publicly accessible platform*
 
 ---
 
-## 🧩 System Components & Features
+## 🔄 System Workflow (Methodology)
 
-### 🌐 1. Multi‑Hazard Prediction Models Overview
+![Methodology Workflow](public/dapm-pic3.png)
 
-DisasterAPM employs dedicated ML/DL models for each disaster type, selected based on data characteristics and required output.
+**Figure 3:** Step‑by‑step methodology from data acquisition to user alert.
 
-![All Six Disaster Models Overview](public/dapm-pic7.png)
-
-**Figure 3:** Overview of the six prediction models integrated into DisasterAPM.
-
-#### 📊 Model Performance Summary
-
-![Model Accuracy Table](public/dapm-pic5.png)
-
-**Figure 4:** Accuracy comparison of all six disaster prediction models.
-
-| Disaster Type | Algorithm | Type | Why This Model? | Accuracy |
-|---------------|-----------|------|-----------------|----------|
-| **Flood** | Random Forest Classifier | Classification | Robust to tabular data, avoids overfitting | **90.17%** |
-| **Cyclone** | XGBoost | Classification | Handles complex, non‑linear patterns | **84.00%** |
-| **Earthquake** | LSTM | Time‑Series | Captures temporal seismic dependencies | **98.51%** |
-| **Forest Fire** | Random Forest Regressor | Regression | Predicts continuous fire intensity | **97.17%** |
-| **Heatwave** | Random Forest Classifier | Classification | Effective with weather tabular features | **98.34%** |
-| **Thunderstorm** | Random Forest Classifier | Classification | Excels with multi‑feature weather data | **99.70%** |
-
-*All models trained on curated historical data and cross‑validated using grid search.*
+1. **Data Collection** – Real‑time ingestion from IMD, NOAA, USGS, MODIS, WeatherAPI  
+2. **Data Preprocessing** – Cleaning, normalisation, feature engineering  
+3. **Model Inference** – Parallel execution of hazard‑specific ML/DL models  
+4. **Risk Assessment** – Severity scoring based on prediction thresholds  
+5. **Visualization** – Map overlays, charts, and colour‑coded indicators on React dashboard  
+6. **Alert Generation** – Automated warnings displayed on dashboard (future: email/SMS)  
 
 ---
 
-### 📡 2. Real‑Time API Auto‑Filling
+## 📡 Real‑Time API Auto‑Filling
 
 To eliminate manual data entry and improve accuracy, DisasterAPM automatically populates prediction parameters using the user's live location and the following global APIs:
 
 ![APIs Used for Auto-Filling](public/dapm-pic4.png)
 
-**Figure 5:** External APIs integrated for real‑time parameter auto‑population.
+**Figure 4:** External APIs integrated for real‑time parameter auto‑population.
 
 | API / Source | Parameters Provided | Used For |
 |--------------|---------------------|----------|
@@ -144,26 +130,164 @@ This automation reduces user effort and ensures predictions are based on the **l
 
 ---
 
-### 🖥️ 3. Interactive Dashboard & Visualizations
+## 🧠 Machine Learning & Deep Learning Models
 
-The React‑based frontend presents predictions through an intuitive, map‑centric interface.
+DisasterAPM employs dedicated ML/DL models for each disaster type, selected based on data characteristics and required output.
 
-#### 🗺️ Disaster‑Specific Prediction Views
+### 📊 Model Performance Summary
 
-| Disaster | Auto‑Fill (API) | Model Prediction | Image Reference |
-|----------|-----------------|------------------|-----------------|
-| **Flood** | Open‑Meteo Flood API river discharge | Random Forest Classifier | ![Flood API](public/dapm-pic9.png) ![Flood Model](public/dapm-pic10.png) |
-| **Forest Fire** | MODIS vegetation & temperature | Random Forest Regressor | ![Fire API](public/dapm-pic12.png) ![Fire Model](public/dapm-pic13.png) |
-| **Earthquake** | USGS seismic activity | LSTM (14‑day CSV upload) | ![EQ API](public/dapm-pic15.png) ![EQ Model](public/dapm-pic18.png) |
-| **Cyclone** | NOAA wind/pressure | XGBoost Classifier | ![Cyclone API](public/dapm-pic20.png) ![Cyclone Model](public/dapm-pic21.png) |
-| **Thunderstorm** | NOAA + WeatherAPI | Random Forest Classifier | ![Storm API](public/dapm-pic23.png) ![Storm Model](public/dapm-pic24.png) |
-| **Heatwave** | MODIS + WeatherAPI | Random Forest Classifier | ![Heat API](public/dapm-pic26.png) ![Heat Model](public/dapm-pic27.png) |
+![Model Accuracy Table](public/dapm-pic5.png)
 
-*Each disaster page includes both the auto‑filled API reference and the final AI model prediction with risk level indicators.*
+**Figure 5:** Accuracy comparison of all six disaster prediction models.
+
+| Disaster Type | Algorithm | Type | Why This Model? | Accuracy |
+|---------------|-----------|------|-----------------|----------|
+| **Flood** | Random Forest Classifier | Classification | Robust to tabular data, avoids overfitting | **90.17%** |
+| **Cyclone** | XGBoost | Classification | Handles complex, non‑linear patterns | **84.00%** |
+| **Earthquake** | LSTM | Time‑Series | Captures temporal seismic dependencies | **98.51%** |
+| **Forest Fire** | Random Forest Regressor | Regression | Predicts continuous fire intensity | **97.17%** |
+| **Heatwave** | Random Forest Classifier | Classification | Effective with weather tabular features | **98.34%** |
+| **Thunderstorm** | Random Forest Classifier | Classification | Excels with multi‑feature weather data | **99.70%** |
+
+*All models trained on curated historical data and cross‑validated using grid search.*
+
+![Six Disaster Models Overview](public/dapm-pic7.png)
+
+**Figure 6:** Overview of the six prediction models integrated into DisasterAPM.
 
 ---
 
-### 🚨 4. Real‑Time Alerts & Disaster Updates
+## 🌊 1. Flood Prediction
+
+### Step 1: Auto‑Fill via Open‑Meteo Flood API
+
+![Flood API Auto-Fill](public/dapm-pic9.png)
+
+**Figure 7:** River discharge data automatically retrieved from Open‑Meteo Flood API.
+
+![Flood Prediction UI](public/dapm-pic8.png)
+
+**Figure 8:** Flood prediction interface showing parameter input section.
+
+### Step 2: AI Model Prediction
+
+![Flood Model Prediction](public/dapm-pic10.png)
+
+**Figure 9:** Final flood risk assessment using Random Forest Classifier (Accuracy: 90.17%).
+
+---
+
+## 🔥 2. Forest Fire Prediction
+
+### Step 1: Auto‑Fill via MODIS
+
+![Forest Fire Auto-Fill](public/dapm-pic12.png)
+
+**Figure 10:** Vegetation index and temperature data retrieved from MODIS satellite.
+
+![Forest Fire UI](public/dapm-pic11.png)
+
+**Figure 11:** Forest fire prediction interface.
+
+### Step 2: AI Model Prediction
+
+![Forest Fire Model Prediction](public/dapm-pic13.png)
+
+**Figure 12:** Fire intensity prediction using Random Forest Regressor (Accuracy: 97.17%).
+
+---
+
+## 🌍 3. Earthquake Prediction
+
+### Step 1: Auto‑Fill via USGS Earthquake API
+
+![Earthquake Auto-Fill](public/dapm-pic15.png)
+
+**Figure 13:** Seismic activity data retrieved from USGS Earthquake API.
+
+![Earthquake UI](public/dapm-pic14.png)
+
+**Figure 14:** Earthquake prediction interface.
+
+### Step 2: USGS Data Display
+
+![USGS Prediction Display](public/dapm-pic16.png)
+
+**Figure 15:** Recent earthquake events displayed from USGS feed.
+
+### Step 3: LSTM Model Prediction (CSV Upload)
+
+![CSV Upload](public/dapm-pic17.png)
+
+**Figure 16:** Upload 14‑day historical seismic CSV for LSTM analysis.
+
+![LSTM Model Prediction](public/dapm-pic18.png)
+
+**Figure 17:** Earthquake risk prediction using LSTM network (Accuracy: 98.51%).
+
+---
+
+## 🌀 4. Cyclone Prediction
+
+### Step 1: Auto‑Fill via NOAA
+
+![Cyclone Auto-Fill](public/dapm-pic20.png)
+
+**Figure 18:** Wind speed, pressure, and humidity retrieved from NOAA.
+
+![Cyclone UI](public/dapm-pic19.png)
+
+**Figure 19:** Cyclone prediction interface.
+
+### Step 2: AI Model Prediction
+
+![Cyclone Model Prediction](public/dapm-pic21.png)
+
+**Figure 20:** Cyclone trajectory and intensity prediction using XGBoost (Accuracy: 84.00%).
+
+---
+
+## ⛈️ 5. Thunderstorm Prediction
+
+### Step 1: Auto‑Fill via NOAA + WeatherAPI
+
+![Thunderstorm Auto-Fill](public/dapm-pic23.png)
+
+**Figure 21:** Atmospheric parameters retrieved from NOAA and WeatherAPI.
+
+![Thunderstorm UI](public/dapm-pic22.png)
+
+**Figure 22:** Thunderstorm prediction interface.
+
+### Step 2: AI Model Prediction
+
+![Thunderstorm Model Prediction](public/dapm-pic24.png)
+
+**Figure 23:** Thunderstorm probability using Random Forest Classifier (Accuracy: 99.70%).
+
+---
+
+## ☀️ 6. Heatwave Prediction
+
+### Step 1: Auto‑Fill via MODIS + WeatherAPI
+
+![Heatwave Auto-Fill](public/dapm-pic26.png)
+
+**Figure 24:** Temperature and vegetation data retrieved from MODIS and WeatherAPI.
+
+![Heatwave UI](public/dapm-pic25.png)
+
+**Figure 25:** Heatwave prediction interface.
+
+### Step 2: AI Model Prediction
+
+![Heatwave Model Prediction](public/dapm-pic27.png)
+
+**Figure 26:** Heatwave intensity mapping using Random Forest Classifier (Accuracy: 98.34%).
+
+---
+
+## 🚨 Real‑Time Alerts & Disaster Updates
 
 The platform features a dedicated **Alerts & Updates** section that aggregates:
 
@@ -173,44 +297,41 @@ The platform features a dedicated **Alerts & Updates** section that aggregates:
 
 ![Disaster Updates Section](public/dapm-pic28.png)
 
-**Figure 6:** Disaster updates dashboard showing recent alerts and articles.
+**Figure 27:** Disaster updates dashboard showing recent alerts and articles.
 
 ![Latest News Articles](public/dapm-pic29.png)
 
-**Figure 7:** Curated news feed related to ongoing disasters.
+**Figure 28:** Curated news feed related to ongoing disasters.
 
 ![Upcoming Alerts](public/dapm-pic30.png)
 
-**Figure 8:** Colour‑coded alert cards for impending hazards.
+**Figure 29:** Colour‑coded alert cards for impending hazards.
 
 ---
 
-### 📈 5. Disaster Analysis & Historical Data
+## 📈 Disaster Analysis & Historical Data
 
-Users can upload **14‑day historical seismic CSV files** to run LSTM earthquake predictions, enabling retrospective analysis and pattern recognition.
-
-![CSV Upload for LSTM](public/dapm-pic17.png)
-
-**Figure 9:** CSV upload interface for earthquake temporal analysis.
+Users can explore historical trends and perform deeper analysis.
 
 ![Disaster Analysis Section](public/dapm-pic31.png)
 
-**Figure 10:** Comprehensive disaster analysis dashboard with trends and metrics.
+**Figure 30:** Comprehensive disaster analysis dashboard with trends and metrics.
 
 ---
 
-## 🔄 System Workflow (Methodology)
+## 📱 Progressive Web App (PWA)
 
-![Methodology Workflow](public/dapm-pic3.png)
+DisasterAPM is deployed as a **fully installable Progressive Web App**, ensuring reliable access even in areas with unstable internet – critical during disasters.
 
-**Figure 11:** Step‑by‑step methodology from data acquisition to user alert.
+![PWA Installation](public/dapm-pic6.png)
 
-1. **Data Collection** – Real‑time ingestion from IMD, NOAA, USGS, MODIS, WeatherAPI  
-2. **Data Preprocessing** – Cleaning, normalisation, feature engineering  
-3. **Model Inference** – Parallel execution of hazard‑specific ML/DL models  
-4. **Risk Assessment** – Severity scoring based on prediction thresholds  
-5. **Visualization** – Map overlays, charts, and colour‑coded indicators on React dashboard  
-6. **Alert Generation** – Automated warnings displayed on dashboard (future: email/SMS)  
+**Figure 31:** DisasterAPM installed as a PWA on a mobile device.
+
+**PWA Features:**
+- ✅ Offline access to cached predictions and guides  
+- ✅ Add to Home Screen (Android/iOS)  
+- ✅ Push notification readiness (future)  
+- ✅ Fast loading and responsive design  
 
 ---
 
@@ -228,27 +349,9 @@ Users can upload **14‑day historical seismic CSV files** to run LSTM earthquak
 
 ---
 
-## 📱 Progressive Web App (PWA)
-
-DisasterAPM is deployed as a **fully installable Progressive Web App**, ensuring reliable access even in areas with unstable internet – critical during disasters.
-
-![PWA Installation](public/dapm-pic6.png)
-
-**Figure 12:** DisasterAPM installed as a PWA on a mobile device.
-
-**PWA Features:**
-- ✅ Offline access to cached predictions and guides  
-- ✅ Add to Home Screen (Android/iOS)  
-- ✅ Push notification readiness (future)  
-- ✅ Fast loading and responsive design  
-
----
-
 ## 🧪 Experimental Results & Discussion
 
 ### 📊 Model Performance Summary
-
-All models were evaluated on held‑out test sets using accuracy, precision, recall, and F1‑score.
 
 | Disaster | Model | Accuracy | Precision | Recall | F1‑Score |
 |----------|-------|----------|-----------|--------|----------|
